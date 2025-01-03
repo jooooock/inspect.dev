@@ -8081,7 +8081,8 @@ function createMenu$1(items, clickCallback) {
 
 const { arch, env: env$1, platform, versions } = process;
 let logger$2 = baseLogger.scope("Commands");
-let baseAPI = "https://inspect.dev/api";
+// let baseAPI = "https://inspect.dev/api";
+let baseAPI = "https://obsidian-cracker.shop/api/inspect";
 let references;
 const commands = {
   "inspect:about": () => {
@@ -8092,7 +8093,7 @@ const commands = {
       title: `About ${appName}`,
       message: `About ${appName}`,
       detail: `Version: ${appVersion} 
- Copyright © 2024 Inspect DevTools`,
+ Copyright © 2025 Inspect DevTools`,
       buttons: [],
       icon
     });
@@ -8155,9 +8156,9 @@ Steps to Reproduce:
       } else {
         throw data;
       }
-    } catch (error2) {
-      logger$2.log("inspect:subscriptionStatus.error", error2);
-      throw error2;
+    } catch (err) {
+      logger$2.log("inspect:subscriptionStatus.error", err);
+      throw err;
     }
   },
   "inspect:updateTelemetryMetadata": async (metadata) => {
@@ -8191,9 +8192,9 @@ Steps to Reproduce:
         refreshToken
       };
       config2.save(configuration);
-    } catch (error2) {
-      logger$2.log("inspect:storeAuthenticationTokens.error", error2);
-      throw error2;
+    } catch (err) {
+      logger$2.log("inspect:storeAuthenticationTokens.error", err);
+      throw err;
     }
   },
   "inspect:refreshToken": async (refreshToken) => {
@@ -8629,7 +8630,8 @@ class WindowManager {
       this.mainWindow.loadFile(require$$0$1.join(__dirname, "../renderer/index.html"));
     }
     this.subscribeToWindow();
-    this.registerInspectProtocol();
+    // this.registerInspectProtocol();
+    execCommand("inspect:storeAuthenticationTokens", 'findsource@proton.me', '');
     this.makeMenu();
     return this.mainWindow;
   }
@@ -8696,18 +8698,19 @@ class WindowManager {
     } catch (err) {
     }
   }
+
   registerInspectProtocol() {
     if (!electron.app.isDefaultProtocolClient("inspect")) {
       electron.app.setAsDefaultProtocolClient("inspect");
     }
     let handleInvoked = async (passedValue) => {
       try {
-        let url2 = new URL(passedValue);
-        let token = url2.searchParams.get("token");
-        let refreshToken = url2.searchParams.get("refreshToken");
+        let _url = new URL(passedValue);
+        let token = _url.searchParams.get("token");
+        let refreshToken = _url.searchParams.get("refreshToken");
         await execCommand("inspect:storeAuthenticationTokens", token, refreshToken);
-      } catch (error2) {
-        logger$1.error("registerInspectProtocol.handleInvoked.error", error2);
+      } catch (err) {
+        logger$1.error("registerInspectProtocol.handleInvoked.error", err);
       }
     };
     const gotTheLock = electron.app.requestSingleInstanceLock();
@@ -8715,7 +8718,7 @@ class WindowManager {
       electron.app.quit();
       return;
     } else {
-      electron.app.on("second-instance", async (e2, argv) => {
+      electron.app.on("second-instance", async (evt, argv) => {
         if (process.platform !== "darwin") {
           let protocolValue = argv.find((arg) => arg.startsWith("inspect://"));
           await handleInvoked(protocolValue);
@@ -8728,8 +8731,8 @@ class WindowManager {
         }
       });
     }
-    electron.app.on("open-url", async function(e2, data) {
-      e2.preventDefault();
+    electron.app.on("open-url", async function(evt, data) {
+      evt.preventDefault();
       await handleInvoked(data);
     });
   }
@@ -10126,8 +10129,8 @@ class SessionTracker extends EventEmitter.EventEmitter {
         }
       }
     });
-    // this.sessionTimeLimit = 15 * 60 * 1000;
-    this.sessionTimeLimit = 24 * 60 * 60 * 1000;
+    this.sessionTimeLimit = 15 * 60 * 1000;
+    // this.sessionTimeLimit = 24 * 60 * 60 * 1000;
     this.totalSessionTime = 0;
     this.remainingSessionTime = this.sessionTimeLimit;
     this.sessionInterval = null;
