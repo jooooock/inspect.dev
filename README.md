@@ -8,6 +8,7 @@
 
 拉取代码之后，执行以下命令启动：
 ```shell
+yarn install
 yarn dev
 ```
 
