@@ -1,13 +1,12 @@
 {
   "name": "inspect.dev",
-  "version": "1.0.0",
+  "version": "1.0.9",
   "main": "index.js",
   "author": "Jock",
   "license": "MIT",
   "scripts": {
-    "dev": "electron src/app/v1.6.5",
-    "debug": "electron --inspect-brk=9090 src/app/v1.6.5",
-    "e:ob": "node scripts/cli.js extract:ob",
+    "dev": "electron src/app/v1.0.9",
+    "debug": "electron --inspect-brk=9090 src/app/v1.0.9",
     "e:app": "node scripts/cli.js extract:app"
   },
   "dependencies": {
