@@ -1,0 +1,46 @@
+{
+  "name": "normalize-path",
+  "description": "Normalize slashes in a file path to be posix/unix-like forward slashes. Also condenses repeat slashes to a single slash and removes and trailing slashes, unless disabled.",
+  "version": "3.0.0",
+  "homepage": "https://github.com/jonschlinkert/normalize-path",
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": "jonschlinkert/normalize-path",
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "devDependencies": {
+    "gulp-format-md": "^1.0.0",
+    "minimist": "^1.2.0",
+    "mocha": "^3.5.3"
+  },
+  "verb": {
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "related": {
+      "description": "Other useful path-related libraries:",
+      "list": [
+        "contains-path",
+        "is-absolute",
+        "is-relative",
+        "parse-filepath",
+        "path-ends-with",
+        "path-ends-with",
+        "unixify"
+      ]
+    },
+    "lint": {
+      "reflinks": true
+    }
+  }
+}

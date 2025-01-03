@@ -1,0 +1,22 @@
+{
+  "name": "methods",
+  "description": "HTTP methods that node supports",
+  "version": "1.1.2",
+  "license": "MIT",
+  "repository": "jshttp/methods",
+  "devDependencies": {
+    "istanbul": "0.4.1",
+    "mocha": "1.21.5"
+  },
+  "files": [
+    "index.js",
+    "HISTORY.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">= 0.6"
+  },
+  "browser": {
+    "http": false
+  }
+}

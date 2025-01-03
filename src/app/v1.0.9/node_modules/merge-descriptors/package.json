@@ -1,0 +1,23 @@
+{
+  "name": "merge-descriptors",
+  "description": "Merge objects using descriptors",
+  "version": "1.0.1",
+  "author": {
+    "name": "Jonathan Ong",
+    "email": "me@jongleberry.com",
+    "url": "http://jongleberry.com",
+    "twitter": "https://twitter.com/jongleberry"
+  },
+  "license": "MIT",
+  "repository": "component/merge-descriptors",
+  "devDependencies": {
+    "istanbul": "0.4.1",
+    "mocha": "1.21.5"
+  },
+  "files": [
+    "HISTORY.md",
+    "LICENSE",
+    "README.md",
+    "index.js"
+  ]
+}
