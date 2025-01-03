@@ -1,0 +1,32 @@
+html,
+body {
+  height: 100%;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Droid Sans, Helvetica Neue, Arial, Helvetica,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  background: #1e1e1e;
+  overflow: hidden;
+  margin: 0;
+}
+
+#app {
+  height: 100%;
+}
+
+a:link {
+  color: #5e5ce6;
+}
+
+.react-transform-component {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.react-transform-element {
+  width: 100% !important;
+  height: 100% !important;
+  flex-direction: column;
+}

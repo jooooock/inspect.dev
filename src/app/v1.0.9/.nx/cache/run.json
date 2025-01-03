@@ -1,0 +1,9 @@
+{
+  "run": {
+    "command": "nx run-many -t build",
+    "startTime": "2024-05-05T23:59:53.770Z",
+    "endTime": "2024-05-05T23:59:53.787Z",
+    "inner": false
+  },
+  "tasks": []
+}

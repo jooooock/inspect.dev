@@ -1,0 +1,37 @@
+{
+  "name": "inspect-app",
+  "productName": "Inspect",
+  "description": "The new standard for mobile web DevTools",
+  "copyright": "Copyright © 2024 Inspect DevTools",
+  "version": "1.0.9",
+  "private": true,
+  "main": "./out/main/index.js",
+  "homepage": "https://inspect.dev",
+  "author": {
+    "name": "Inspect DevTools",
+    "email": "hello@inspect.dev"
+  },
+  "dependencies": {
+    "@electron-toolkit/preload": "^2.0.0",
+    "@inspect/ios-adaptor": "file:./packages/inspect-ios-adaptor",
+    "@todesktop/runtime": "^1.6.1",
+    "electron-is-dev": "^1.2.0",
+    "electron-log": "^5.0.3",
+    "electron-store": "^7.0.2",
+    "electron-updater": "^4.3.8",
+    "fix-path": "^4.0.0",
+    "ms": "^2.1.2",
+    "node-fetch": "^3.3.2",
+    "node-machine-id": "^1.1.12",
+    "os-name": "^6.0.0",
+    "posthog-node": "^3.5.0",
+    "re-resizable": "^6.9.0",
+    "react": "^18.2.0",
+    "react-albus-react18": "^2.0.1",
+    "react-dom": "^18.2.0",
+    "react-overlays": "^5.2.1",
+    "react-use-intercom": "^1.1.9",
+    "styled-components": "^6.1.1",
+    "ws": "^8.5.0"
+  }
+}
