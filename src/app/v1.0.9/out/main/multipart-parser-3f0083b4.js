@@ -1,4 +1,5 @@
 "use strict";
+
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 require("node:fs");
 require("node:path");
@@ -32,6 +33,8 @@ require("node:net");
 require("assert");
 require("buffer");
 require("util");
+
+
 let s = 0;
 const S = {
   START_BOUNDARY: s++,
@@ -57,6 +60,7 @@ const HYPHEN = 45;
 const COLON = 58;
 const A = 97;
 const Z = 122;
+
 const lower = (c) => c | 32;
 const noop = () => {
 };
@@ -378,4 +382,5 @@ async function toFormData(Body, ct) {
   parser.end();
   return formData;
 }
+
 exports.toFormData = toFormData;

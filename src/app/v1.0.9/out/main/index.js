@@ -1,4 +1,5 @@
 "use strict";
+
 require("@inspect/ios-adaptor");
 require("electron");
 require("./index-588e7ee8.js");

@@ -1,6 +1,9 @@
 "use strict";
+
 const electron = require("electron");
 const preload = require("@electron-toolkit/preload");
+
+
 const api = {};
 if (process.contextIsolated) {
   try {

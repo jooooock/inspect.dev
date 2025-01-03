@@ -1,4 +1,5 @@
 "use strict";
+
 const iosAdaptor = require("@inspect/ios-adaptor");
 const electron = require("electron");
 const EventEmitter = require("events");
@@ -30,12 +31,16 @@ const node_net = require("node:net");
 const require$$0$5 = require("assert");
 const require$$0$6 = require("buffer");
 const require$$2 = require("util");
+
+
 baseLogger.initialize();
 baseLogger.transports.file.level = "debug";
 baseLogger.transports.console.level = "debug";
 baseLogger.eventLogger.startLogging();
+
 const todesktop$1 = require("@todesktop/runtime");
 const logger$4 = baseLogger.scope("AutoUpdater");
+
 class AutoUpdater extends EventEmitter {
   constructor() {
     super();
@@ -77,6 +82,7 @@ class AutoUpdater extends EventEmitter {
     todesktop$1.autoUpdater.restartAndInstall();
   }
 }
+
 class Config extends EventEmitter {
   constructor() {
     super();
@@ -105,6 +111,7 @@ class Config extends EventEmitter {
     this.store.clear();
   }
 }
+
 const nameMap = /* @__PURE__ */ new Map([
   [23, ["Sonoma", "14"]],
   [22, ["Ventura", "13"]],
@@ -126,6 +133,7 @@ const nameMap = /* @__PURE__ */ new Map([
   [6, ["Jaguar", "10.2"]],
   [5, ["Puma", "10.1"]]
 ]);
+
 function macosRelease(release) {
   release = Number((release || os$1.release()).split(".")[0]);
   const [name, version] = nameMap.get(release) || ["Unknown", ""];
@@ -134,7 +142,17 @@ function macosRelease(release) {
     version
   };
 }
-var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+
+var commonjsGlobal = typeof globalThis !== "undefined"
+    ? globalThis
+    : typeof window !== "undefined"
+        ? window
+        : typeof global !== "undefined"
+            ? global
+            : typeof self !== "undefined"
+                ? self
+                : {};
+
 function getDefaultExportFromCjs(x2) {
   return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
 }
@@ -264,6 +282,7 @@ function sync(path2, options) {
     }
   }
 }
+
 const isWindows = process.platform === "win32" || process.env.OSTYPE === "cygwin" || process.env.OSTYPE === "msys";
 const path$3 = require$$0$1;
 const COLON = isWindows ? ";" : ":";
@@ -2020,6 +2039,8 @@ function osName(platform2, release) {
   }
   return platform2;
 }
+
+// 遥测 https://posthog.com/
 const logger$3 = baseLogger.scope("Telemetry");
 class Telemetry {
   constructor(appConfig) {
@@ -2046,13 +2067,17 @@ class Telemetry {
           $set: { ...metadata }
         }
       });
-    } catch (error2) {
+    } catch (err) {
     }
   }
   async setup() {
     logger$3.log("setup.start");
-    this.client = new posthogNode.PostHog("phc_Y78wvbBVUb9c72PexTxWJ11mJLY3ggMqnB3b7XRCqeb", {
-      host: "https://app.posthog.com",
+    // this.client = new posthogNode.PostHog("phc_Y78wvbBVUb9c72PexTxWJ11mJLY3ggMqnB3b7XRCqeb", {
+    //   host: "https://app.posthog.com",
+    //   disableGeoip: false
+    // });
+    this.client = new posthogNode.PostHog("phc_D5cxain5RTOcBFXZgbu7IrC4Y3Q2B5ZhwoofxxVnDor", {
+      host: "https://us.i.posthog.com",
       disableGeoip: false
     });
     try {
@@ -2073,7 +2098,7 @@ class Telemetry {
       logger$3.log("setup.complete");
       this.isReady = true;
       this.replayBuffer();
-    } catch (error2) {
+    } catch (err) {
     }
   }
   sendEvent(eventName, params) {
@@ -8052,6 +8077,8 @@ function createMenu$1(items, clickCallback) {
   });
   return menu;
 }
+
+
 const { arch, env: env$1, platform, versions } = process;
 let logger$2 = baseLogger.scope("Commands");
 let baseAPI = "https://inspect.dev/api";
@@ -8534,6 +8561,7 @@ const editMenu = () => {
     submenu
   };
 };
+
 let menu_;
 const createMenu = () => {
   let menu = [];
@@ -8549,6 +8577,7 @@ const buildMenu = () => {
   menu_ = electron.Menu.buildFromTemplate(createMenu());
   return menu_;
 };
+
 const appIconPng = require$$0$1.join(__dirname, "../../resources/icons/icon.png");
 const appIconIco = require$$0$1.join(__dirname, "../../resources/icons/icon.ico");
 const logger$1 = baseLogger.scope("WindowManager");
@@ -10084,6 +10113,8 @@ function fixPath() {
     process$3.env.PATH
   ].join(":");
 }
+
+
 class SessionTracker extends EventEmitter.EventEmitter {
   constructor() {
     super();
@@ -10095,7 +10126,8 @@ class SessionTracker extends EventEmitter.EventEmitter {
         }
       }
     });
-    this.sessionTimeLimit = 15 * 60 * 1e3;
+    // this.sessionTimeLimit = 15 * 60 * 1000;
+    this.sessionTimeLimit = 24 * 60 * 60 * 1000;
     this.totalSessionTime = 0;
     this.remainingSessionTime = this.sessionTimeLimit;
     this.sessionInterval = null;
@@ -10154,9 +10186,11 @@ const telemetry = new Telemetry(config);
 const windowManager = new WindowManager(config);
 const sessionTracker = new SessionTracker();
 fixPath();
+
 const logger = baseLogger.scope("main");
 const deviceAdaptorLogger = baseLogger.create({ logId: "deviceAdaptor" });
 deviceAdaptorLogger.transports.file.fileName = "deviceAdaptor.log";
+
 const deviceAdaptor = new iosAdaptor.DeviceAdaptor({
   customLogger: deviceAdaptorLogger
 });
@@ -10176,6 +10210,8 @@ setReferences({
   adaptor: deviceAdaptor,
   sessionTracker
 });
+
+
 let mainWindow;
 sessionTracker.on("sessionTimeUpdated", (time) => {
   mainWindow?.webContents.send("sessionTracking.sessionTimeUpdated", time);
@@ -10205,21 +10241,21 @@ deviceAdaptor.on("messageFromTarget", (msg) => {
   }
   mainWindow.webContents.send("messageFromTarget", msg);
 });
-electron.ipcMain.on("config:save", async (e2, newConfig) => {
+
+electron.ipcMain.on("config:save", async (event, newConfig) => {
   config.save(newConfig);
 });
-electron.ipcMain.on("config:load", async (e2) => {
+electron.ipcMain.on("config:load", async (event) => {
   sessionTracker.initialize();
   mainWindow?.webContents.send("configChanged", config.get());
 });
-electron.ipcMain.handle("client:execCommand", async (e2, commandName, ...args2) => {
+electron.ipcMain.handle("client:execCommand", async (event, commandName, ...args) => {
   try {
-    let result = await execCommand(commandName, ...args2);
-    return result;
-  } catch (error2) {
+    return await execCommand(commandName, ...args);
+  } catch (err) {
     return {
       status: "error",
-      error: error2
+      error: err
     };
   }
 });
@@ -10227,6 +10263,7 @@ electron.app.on("ready", () => {
   telemetry.sendEvent("ready");
   mainWindow = windowManager.createWindow();
   deviceAdaptor.start();
+
   electron.app.on("activate", function() {
     telemetry.sendEvent("activate");
   });
@@ -10239,5 +10276,6 @@ electron.app.on("ready", () => {
     mainWindow = null;
   });
 });
+
 exports.File = File2;
 exports.FormData = FormData;
